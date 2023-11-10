@@ -1,8 +1,9 @@
-﻿using System.Numerics;
+﻿using System.Collections;
+using System.Numerics;
 
 namespace MSU.TI.mmalgo.Stack
 {
-    public class Stack<T>
+    public class Stack<T> : IEnumerable<T>
     {
         private const int _defaultCapacity = 16;
 
@@ -78,5 +79,20 @@ namespace MSU.TI.mmalgo.Stack
 
             _values = newValues;
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (var i = 0; i <= _top; i++)
+            {
+                yield return _values[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+
     }
+
 }
